@@ -1,15 +1,23 @@
 import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {PlayerVoteCard} from '../types/playerVoteCard';
+import {COLORS} from '../assets/constants';
 
-const Card = props => {
-  const {player, increaseVoteCount, decreaseVoteCount} = props;
-
+const Card: React.FC<PlayerVoteCard> = ({
+  player,
+  increaseVoteCount,
+  decreaseVoteCount,
+  votes,
+}) => {
   return (
     <View style={styles.cardContainer}>
-      {/* <Text style={styles.cardTitle}>Welcome to the Card</Text> */}
-      <Text style={styles.cardText}>{player.name}</Text>
-      <Text style={styles.cardText}>{player.country}</Text>
-      <Text style={styles.cardText}>{player.club}</Text>
+      <View style={styles.cardHeader}>
+        <Text style={styles.cardTitle}>{player.name}</Text>
+        <Text style={styles.cardTitle}>{votes}</Text>
+      </View>
+      <Text style={styles.cardText}>
+        {player.country} | {player.club}
+      </Text>
       <TouchableOpacity
         style={styles.voteButton}
         onPress={() => increaseVoteCount(player.id)}>
@@ -26,15 +34,19 @@ const Card = props => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.LIGHT,
     borderRadius: 8,
     padding: 16,
     marginBottom: 16,
     elevation: 4, // Android elevation for shadow
-    shadowColor: '#000',
+    shadowColor: COLORS.DARK,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,
     shadowRadius: 4,
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   cardTitle: {
     fontSize: 18,
@@ -46,21 +58,21 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   voteButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: COLORS.GREEN,
     padding: 10,
     borderRadius: 4,
     marginTop: 8,
     alignItems: 'center',
   },
   unvoteButton: {
-    backgroundColor: '#FF5733',
+    backgroundColor: COLORS.RED,
     padding: 10,
     borderRadius: 4,
     marginTop: 8,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: COLORS.LIGHT,
     fontWeight: 'bold',
   },
 });

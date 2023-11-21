@@ -1,20 +1,22 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Card from './src/components/Card';
 import {Memo} from '@legendapp/state/react';
-import {observable} from '@legendapp/state';
+import {ObservableObject, observable} from '@legendapp/state';
+import {CountryCode} from './src/types/country.enum';
+import {ClubCode} from './src/types/club.enum';
+import {Player} from './src/types/player';
 
-const state = observable({
+interface State {
+  players: Player[];
+  voteForM: number;
+  voteForC: number;
+}
+
+const state: ObservableObject<State> = observable({
   players: [
-    {id: 1, name: 'Messi', club: 'Paris', country: 'ARG'},
-    {id: 2, name: 'Ronaldo', club: 'Manchester', country: 'POR'},
+    {id: 1, name: 'Messi', club: ClubCode.PAR, country: CountryCode.ARG},
+    {id: 2, name: 'Ronaldo', club: ClubCode.MAN, country: CountryCode.POR},
   ],
   voteForM: 0,
   voteForC: 0,
@@ -23,35 +25,18 @@ const state = observable({
 function App(): JSX.Element {
   const playersData = state.players.get();
 
-  // const voteForM = () => state.voteForM.get();
-  // const voteForC = () => state.voteForC.get(); // init value 9
-
-  console.log(playersData, 'playersData');
-
   // increase player vote
-  const voteForMessi = () => {
-    console.log(state.voteForM.get(), 'before vote');
-
-    // state.voteForM.set(state.voteForC.get() + 1);
-    state.voteForM.set(state.voteForM.get() + 1);
-    // Alert.alert(state.voteForC.get());
-    // state.voteForM.set(voteForM + 1);
-
-    console.log(state.voteForM.get(), 'after vote');
-  };
-  const voteForRonaldo = () => state.voteForC.set(state.voteForC.get() + 1);
-
-  // decrease player vote
-  const unVoteForMessi = () => {
-    console.log(state.voteForM.get(), 'before unvote');
-
-    // Use functional update to ensure you're working with the latest state
-    state.voteForM.set(state.voteForM.get() - 1);
-
-    console.log(state.voteForM.get(), 'after unvote');
+  const votePlayer = (id: number) => {
+    id === 1
+      ? state.voteForM.set(state.voteForM.get() + 1)
+      : state.voteForC.set(state.voteForC.get() + 1);
   };
 
-  const unVoteForRonaldo = () => state.voteForC.set(state.voteForC.get() - 1);
+  const unvotePlayer = (id: number) => {
+    id === 1
+      ? state.voteForM.set(state.voteForM.get() - 1)
+      : state.voteForC.set(state.voteForC.get() - 1);
+  };
 
   return (
     <SafeAreaView style={styles.sectionContainer}>
@@ -60,11 +45,9 @@ function App(): JSX.Element {
         <Text>Vote for the Best Football player in the world</Text>
         <Memo>
           {() => (
-            <View>
-              <Text>
-                Messi: {state.voteForC.get()} - {state.voteForM.get()}: Ronaldo
-              </Text>
-            </View>
+            <Text>
+              Messi: {state.voteForC.get()} - {state.voteForM.get()}: Ronaldo
+            </Text>
           )}
         </Memo>
         <View style={styles.sectionContainer}>
@@ -72,17 +55,15 @@ function App(): JSX.Element {
             <View key={player.id}>
               <Card
                 player={player}
-                increaseVoteCount={
-                  player.id === 1 ? voteForMessi : voteForRonaldo
+                votes={
+                  player.id === 1 ? state.voteForM.get() : state.voteForC.get()
                 }
-                decreaseVoteCount={
-                  player.id === 1 ? unVoteForMessi : unVoteForRonaldo
-                }
+                increaseVoteCount={() => votePlayer(player.id)}
+                decreaseVoteCount={() => unvotePlayer(player.id)}
               />
             </View>
           ))}
         </View>
-        {/* <Card />*/}
       </View>
     </SafeAreaView>
   );
