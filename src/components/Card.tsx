@@ -2,35 +2,33 @@ import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {PlayerVoteCard} from '../types/playerVoteCard';
 import {COLORS} from '../assets/constants';
+import {observer} from '@legendapp/state/react';
 
-const Card: React.FC<PlayerVoteCard> = ({
-  player,
-  increaseVoteCount,
-  decreaseVoteCount,
-  votes,
-}) => {
-  return (
-    <View style={styles.cardContainer}>
-      <View style={styles.cardHeader}>
-        <Text style={styles.cardTitle}>{player.name}</Text>
-        <Text style={styles.cardTitle}>{votes}</Text>
+const Card: React.FC<PlayerVoteCard> = observer(
+  ({player, increaseVoteCount, decreaseVoteCount, votes}) => {
+    return (
+      <View style={styles.cardContainer}>
+        <View style={styles.cardHeader}>
+          <Text style={styles.cardTitle}>{player.name}</Text>
+          <Text style={styles.cardTitle}>{votes}</Text>
+        </View>
+        <Text style={styles.cardText}>
+          {player.country} | {player.club}
+        </Text>
+        <TouchableOpacity
+          style={styles.voteButton}
+          onPress={() => increaseVoteCount(player.id)}>
+          <Text style={styles.buttonText}>Vote</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.unvoteButton}
+          onPress={() => decreaseVoteCount(player.id)}>
+          <Text style={styles.buttonText}>Unvote</Text>
+        </TouchableOpacity>
       </View>
-      <Text style={styles.cardText}>
-        {player.country} | {player.club}
-      </Text>
-      <TouchableOpacity
-        style={styles.voteButton}
-        onPress={() => increaseVoteCount(player.id)}>
-        <Text style={styles.buttonText}>Vote</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.unvoteButton}
-        onPress={() => decreaseVoteCount(player.id)}>
-        <Text style={styles.buttonText}>Unvote</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   cardContainer: {
