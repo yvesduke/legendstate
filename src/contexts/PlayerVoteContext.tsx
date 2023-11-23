@@ -33,3 +33,9 @@ export const usePlayerVote = () => {
 
   return context;
 };
+
+export const PlayerVoteProvider = ({children}) => (
+  <PlayerVoteContext.Provider value={initialState}>
+    {children}
+  </PlayerVoteContext.Provider>
+);
