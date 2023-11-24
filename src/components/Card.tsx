@@ -1,8 +1,10 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import {PlayerVoteCard} from '../types/playerVoteCard';
 import {COLORS} from '../assets/constants';
 import {observer} from '@legendapp/state/react';
+import Button from './Buttons/Button';
+import {ButtonVariant} from '../types/button.enum';
 
 const Card: React.FC<PlayerVoteCard> = observer(
   ({player, increaseVoteCount, decreaseVoteCount, votes}) => {
@@ -15,16 +17,14 @@ const Card: React.FC<PlayerVoteCard> = observer(
         <Text style={styles.cardText}>
           {player.country} | {player.club}
         </Text>
-        <TouchableOpacity
-          style={styles.voteButton}
-          onPress={() => increaseVoteCount(player.id)}>
+        <Button onPress={() => increaseVoteCount(player.id)}>
           <Text style={styles.buttonText}>Vote</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.unvoteButton}
+        </Button>
+        <Button
+          variant={ButtonVariant.DANGER}
           onPress={() => decreaseVoteCount(player.id)}>
           <Text style={styles.buttonText}>Unvote</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     );
   },

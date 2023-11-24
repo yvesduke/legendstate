@@ -1,5 +1,5 @@
 import {PlayerVoteProvider} from '../contexts/PlayerVoteContext';
-import App from '../../App';
+import App from '../App';
 
 const VoteProvider = () => (
   <PlayerVoteProvider>

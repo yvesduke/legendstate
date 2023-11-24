@@ -5,6 +5,7 @@ import {observer} from '@legendapp/state/react';
 import {usePlayerVote} from '../contexts/PlayerVoteContext';
 import {Player} from '../types/player';
 import HorizontalLine from './HorizontalLine';
+import AddVote from '../controller/AddVote';
 
 interface ScoreCardProp {
   players: Player[];
@@ -12,6 +13,14 @@ interface ScoreCardProp {
 
 const ScoreCard: React.FC<ScoreCardProp> = observer(({players}) => {
   const {CVote, MVote} = usePlayerVote();
+
+  const RenderScore = observer(({p}: {p: Player}) => {
+    return (
+      <Text style={styles.cardTitle}>
+        {p.id === 1 ? MVote.get() : CVote.get()}
+      </Text>
+    );
+  });
   return (
     <View style={[styles.cardContainer]}>
       <View style={[styles.sectionHeader]}>
@@ -24,9 +33,8 @@ const ScoreCard: React.FC<ScoreCardProp> = observer(({players}) => {
         {players.map(p => (
           <View key={p.id} style={styles.sectionRow}>
             <Text style={styles.cardTitle}>{p.name}</Text>
-            <Text style={styles.cardTitle}>
-              {p.id === 1 ? MVote.get() : CVote.get()}
-            </Text>
+            <AddVote pId={p.id} />
+            <RenderScore p={p} />
           </View>
         ))}
       </View>
@@ -46,6 +54,7 @@ const styles = StyleSheet.create({
   },
   sectionContainer: {
     padding: 16,
+    gap: 8,
   },
   sectionHeader: {
     padding: 16,
@@ -56,11 +65,11 @@ const styles = StyleSheet.create({
   sectionRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 8,
   },
 });
 

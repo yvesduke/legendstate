@@ -27,14 +27,12 @@ const Home = observer((): JSX.Element => {
   const playersData = state.players.get(); // destructure data from state
 
   // context api
-  const {CVote, MVote} = usePlayerVote();
+  // const {CVote, MVote} = usePlayerVote();
 
   const votePlayer = (id: number) => {
     if (id === 1) {
       state.voteForM.set(state.voteForM.get() + 1);
-      MVote.set(MVote.get() + 1); // directly modifying context in place
     } else {
-      CVote.set(CVote.get() + 1); // directly modifying context in place
       state.voteForC.set(state.voteForC.get() + 1);
     }
   };
@@ -42,9 +40,7 @@ const Home = observer((): JSX.Element => {
   const unvotePlayer = (id: number) => {
     if (id === 1) {
       state.voteForM.set(state.voteForM.get() - 1);
-      MVote.set(MVote.get() - 1);
     } else {
-      CVote.set(CVote.get() - 1);
       state.voteForC.set(state.voteForC.get() - 1);
     }
   };
@@ -66,7 +62,9 @@ const Home = observer((): JSX.Element => {
             <Card
               key={player.id}
               player={player}
-              votes={player.id === 1 ? MVote.get() : CVote.get()}
+              votes={
+                player.id === 1 ? state.voteForM.get() : state.voteForC.get()
+              }
               increaseVoteCount={() => votePlayer(player.id)}
               decreaseVoteCount={() => unvotePlayer(player.id)}
             />
