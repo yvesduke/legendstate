@@ -36,10 +36,8 @@ const ScoreCard: React.FC<ScoreCardProp> = observer(({players}) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    overflow: 'hidden',
     backgroundColor: COLORS.LIGHT,
     borderRadius: 8,
-    marginBottom: 16,
     elevation: 4, // Android elevation for shadow
     shadowColor: COLORS.DARK,
     shadowOffset: {width: 0, height: 2},
@@ -52,6 +50,8 @@ const styles = StyleSheet.create({
   sectionHeader: {
     padding: 16,
     backgroundColor: COLORS.GREEN,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 8,
   },
   sectionRow: {
     flexDirection: 'row',

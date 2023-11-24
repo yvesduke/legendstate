@@ -1,12 +1,12 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import Card from './src/components/Card';
 import {Memo, observer, useObservable} from '@legendapp/state/react';
 import {ObservableObject} from '@legendapp/state';
-import {CountryCode, ClubCode} from './src/types';
-import {Player} from './src/types/player';
-import {usePlayerVote} from './src/contexts/PlayerVoteContext';
-import ScoreCard from './src/components/ScoreCard';
+import {CountryCode, ClubCode} from '../../types';
+import {Player} from '../../types/player';
+import {usePlayerVote} from '../../contexts/PlayerVoteContext';
+import Card from '../../components/Card';
+import ScoreCard from '../../components/ScoreCard';
 
 interface State {
   players: Player[];
@@ -14,7 +14,7 @@ interface State {
   voteForC: number;
 }
 
-const App = observer((): JSX.Element => {
+const Home = observer((): JSX.Element => {
   const state: ObservableObject<State> = useObservable({
     players: [
       {id: 1, name: 'Messi', club: ClubCode.PAR, country: CountryCode.ARG},
@@ -50,30 +50,27 @@ const App = observer((): JSX.Element => {
   };
 
   return (
-    <SafeAreaView style={styles.sectionContainer}>
-      <View>
+    <SafeAreaView>
+      <View style={styles.container}>
         <Text style={styles.sectionTitle}>Legend State Implementation</Text>
         <Text>Vote for the Best Football player in the world</Text>
         <Memo>
           {() => (
-            <Text>
+            <Text style={styles.highlight}>
               Messi: {state.voteForC.get()} - {state.voteForM.get()}: Ronaldo
             </Text>
           )}
         </Memo>
         <View style={styles.sectionContainer}>
           {playersData.map(player => (
-            <View key={player.id}>
-              <Card
-                player={player}
-                votes={player.id === 1 ? MVote.get() : CVote.get()}
-                increaseVoteCount={() => votePlayer(player.id)}
-                decreaseVoteCount={() => unvotePlayer(player.id)}
-              />
-            </View>
+            <Card
+              key={player.id}
+              player={player}
+              votes={player.id === 1 ? MVote.get() : CVote.get()}
+              increaseVoteCount={() => votePlayer(player.id)}
+              decreaseVoteCount={() => unvotePlayer(player.id)}
+            />
           ))}
-        </View>
-        <View style={styles.sectionContainer}>
           <ScoreCard players={playersData} />
         </View>
       </View>
@@ -82,9 +79,10 @@ const App = observer((): JSX.Element => {
 });
 
 const styles = StyleSheet.create({
+  container: {paddingHorizontal: 24},
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 24,
+    gap: 16,
   },
   sectionTitle: {
     fontSize: 24,
@@ -100,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;
