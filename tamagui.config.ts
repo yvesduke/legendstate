@@ -4,18 +4,20 @@
 
 // for react-native only: @tamagui/config/v2-native
 
-import {config} from '@tamagui/config/v2';
+import {config} from '@tamagui/config/v2-native';
 
-import {createTamagui} from 'tamagui';
-const tamaguiConfig = createTamagui(config);
-// this makes typescript properly type everything based on the config
+import {Text, View} from 'react-native';
 
-type Conf = typeof tamaguiConfig;
+import {createTamagui} from '@tamagui/core'; // or '@tamagui/core'
+const appConfig = createTamagui(config);
+export type AppConfig = typeof appConfig;
+declare module '@tamagui/core' {
+  // or '@tamagui/core'
 
-declare module 'tamagui' {
-  interface TamaguiCustomConfig extends Conf {}
+  // overrides TamaguiCustomConfig so your custom types
+
+  // work everywhere you import `tamagui`
+
+  interface TamaguiCustomConfig extends AppConfig {}
 }
-export default tamaguiConfig;
-// depending on if you chose tamagui, @tamagui/core, or @tamagui/web
-
-// be sure the import and declare module lines both use that same name
+export default appConfig;

@@ -1,15 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {
-  PlayerVoteProvider,
-  usePlayerVote,
-} from '../../contexts/PlayerVoteContext';
+import {usePlayerVote} from '../../contexts/PlayerVoteContext';
 import {observer} from '@legendapp/state/react';
 import {Player} from '../../types/player';
 import Button from '../../components/Buttons/Button';

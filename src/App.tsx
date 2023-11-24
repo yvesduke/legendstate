@@ -1,4 +1,5 @@
-// import '@tamagui/core/reset.css';
+import {TamaguiProvider} from 'tamagui';
+import config from '../tamagui.config';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import Home from './screens/Home';
@@ -10,11 +11,11 @@ import Home from './screens/Home';
 
 const App = () => {
   return (
-    // <TamaguiProvider config={config}>
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <Home />
-    </ScrollView>
-    // </TamaguiProvider>
+    <TamaguiProvider config={config}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Home />
+      </ScrollView>
+    </TamaguiProvider>
   );
 };
 

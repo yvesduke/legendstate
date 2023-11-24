@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Memo, observer, useObservable} from '@legendapp/state/react';
 import {ObservableObject} from '@legendapp/state';
 import {CountryCode, ClubCode} from '../../types';
@@ -7,6 +7,8 @@ import {Player} from '../../types/player';
 import {usePlayerVote} from '../../contexts/PlayerVoteContext';
 import Card from '../../components/Card';
 import ScoreCard from '../../components/ScoreCard';
+
+import {Text} from '@tamagui/core'; // or '@tamagui/core'
 
 interface State {
   players: Player[];
@@ -52,7 +54,7 @@ const Home = observer((): JSX.Element => {
         <Text>Vote for the Best Football player in the world</Text>
         <Memo>
           {() => (
-            <Text style={styles.highlight}>
+            <Text color="red" fontSize={20} fontWeight={'bold'}>
               Messi: {state.voteForC.get()} - {state.voteForM.get()}: Ronaldo
             </Text>
           )}
