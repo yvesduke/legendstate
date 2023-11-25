@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "nyc yarn test"
   },
   "dependencies": {
     "@legendapp/state": "^2.1.3",
