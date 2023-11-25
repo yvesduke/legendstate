@@ -19,3 +19,5 @@
 //   };
 // });
 ```
+
+`https://jestjs.io/docs/configuration#coveragedirectory-string`

@@ -6,6 +6,7 @@ import {CountryCode, ClubCode} from '../../types';
 import {Player} from '../../types/player';
 import Card from '../../components/Card';
 import ScoreCard from '../../components/ScoreCard';
+import * as Sentry from '@sentry/react-native';
 
 import {Text} from '@tamagui/core'; // or '@tamagui/core'
 
@@ -48,6 +49,12 @@ const Home = observer((): JSX.Element => {
 
   return (
     <SafeAreaView>
+      <Button
+        title="Try! Sentry"
+        onPress={() => {
+          Sentry.captureException(new Error('First error'));
+        }}
+      />
       <View style={styles.container}>
         <Text style={styles.sectionTitle}>Legend State Implementation</Text>
         <Text>Vote for the Best Football player in the world</Text>
