@@ -12,7 +12,9 @@ const Card: React.FC<PlayerVoteCard> = observer(
       <View style={styles.cardContainer}>
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>{player.name}</Text>
-          <Text style={styles.cardTitle}>{votes}</Text>
+          <Text testID={player.name + '-vote'} style={styles.cardTitle}>
+            {votes}
+          </Text>
         </View>
         <Text style={styles.cardText}>
           {player.country} | {player.club}

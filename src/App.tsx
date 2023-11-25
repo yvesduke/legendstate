@@ -1,17 +1,12 @@
 import {TamaguiProvider} from 'tamagui';
-import config from '../tamagui.config';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import appConfig from '../tamagui.config';
+import {ScrollView, StyleSheet} from 'react-native';
 import React from 'react';
 import Home from './screens/Home';
 
-// import {TamaguiProvider} from 'tamagui';
-
-// import config from './tamagui.config';
-// // import tamaguiConfig from './tamagui.config';
-
 const App = () => {
   return (
-    <TamaguiProvider config={config}>
+    <TamaguiProvider config={appConfig}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Home />
       </ScrollView>

@@ -1,17 +1,13 @@
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
-  // plugins: [
-  //   [
-  //     'module-resolver',
-  //     {
-  //       // root: ['.'],
-  //       alias: {
-  //         '@src': './src',
-  //         '@components': './src/components',
-  //         '@screens': './src/screens',
-  //         // '@hooks': './src/hooks',
-  //       },
-  //     },
-  //   ],
-  // ],
+  plugins: [
+    [
+      '@tamagui/babel-plugin',
+      {
+        exclude: /node_modules/,
+        config: './tamagui.config.ts',
+        components: ['tamagui'],
+      },
+    ],
+  ],
 };

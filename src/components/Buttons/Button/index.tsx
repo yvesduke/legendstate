@@ -28,6 +28,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <TouchableOpacity
+      accessibilityRole="button"
       {...restProps}
       style={[handleButtonVariance(), handleSize()]}>
       {restProps.children}

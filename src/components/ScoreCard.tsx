@@ -16,7 +16,7 @@ const ScoreCard: React.FC<ScoreCardProp> = observer(({players}) => {
 
   const RenderScore = observer(({p}: {p: Player}) => {
     return (
-      <Text style={styles.cardTitle}>
+      <Text testID={p.name + '-sc-vote'} style={styles.cardTitle}>
         {p.id === 1 ? MVote.get() : CVote.get()}
       </Text>
     );
