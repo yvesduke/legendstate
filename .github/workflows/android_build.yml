@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies # install project deps with --frozen-lockfile to make sure we will have the same packages version ( very recommended  on running yarn install on ci)
         run: yarn install --frozen-lockfile
 
+      - name: Test
+        run: yarn test
+
       ## configure cash for gradle : will help to reduce build time
       # - name: Cache Gradle Wrapper
       #   uses: actions/cache@v2

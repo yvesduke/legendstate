@@ -57,6 +57,9 @@ jobs:
       - name: Install Pods
         run: pod install --repo-update && cd ..
 
+      - name: Test
+        run: yarn test
+
     #   - name: Build IOS App
     #     uses: yukiarrr/ios-build-action@v1.4.0
     #     with:
