@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {COLORS} from '../../../assets/constants';
-import {ButtonSize, ButtonVariant} from '../../../types/button.enum';
+import {ButtonVariant} from '../../../types/button.enum';
 
 interface ButtonProps extends TouchableOpacityProps {
   variant?: ButtonVariant;
@@ -18,7 +18,9 @@ const Button: React.FC<ButtonProps> = ({
   ...restProps
 }) => {
   const handleButtonVariance = () => {
-    if (variant === ButtonVariant.DANGER) return styles.danger;
+    if (variant === ButtonVariant.DANGER) {
+      return styles.danger;
+    }
     return styles.success;
   };
 

@@ -2,11 +2,7 @@ import {render, screen, fireEvent} from '@testing-library/react-native';
 import Home from '.';
 import appConfig from '../../../tamagui.config';
 import {TamaguiProvider} from 'tamagui';
-import {
-  usePlayerVote,
-  PlayerVoteProvider,
-} from '../../contexts/PlayerVoteContext';
-import {ReactNode} from 'react';
+import {PlayerVoteProvider} from '../../contexts/PlayerVoteContext';
 
 describe('Home', () => {
   const setup = () =>
@@ -27,7 +23,6 @@ describe('Home', () => {
   });
   it('should have initial score', () => {
     setup();
-    const initScore = screen.getByTestId('scoreHeader');
     // expect(initScore).toBeTruthy;
     expect(screen.getByText('Messi: 0 - 0 :Ronaldo'));
   });

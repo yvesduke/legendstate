@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Memo, observer, useObservable} from '@legendapp/state/react';
 import {ObservableObject} from '@legendapp/state';
 import {CountryCode, ClubCode} from '../../types';

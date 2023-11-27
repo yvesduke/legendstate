@@ -1,6 +1,7 @@
+import React from 'react';
 import {TamaguiProvider} from 'tamagui';
 import appConfig from '../tamagui.config';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView} from 'react-native';
 import Home from './screens/Home';
 
 const App = () => {
@@ -14,5 +15,3 @@ const App = () => {
 };
 
 export default App;
-
-const styles = StyleSheet.create({});

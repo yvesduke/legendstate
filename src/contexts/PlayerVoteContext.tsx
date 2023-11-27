@@ -58,10 +58,11 @@ export const PlayerVoteProvider: React.FC<PlayerVoteProviderProp> = ({
 export const usePlayerVote = () => {
   const context = useContext(PlayerVoteContext)!;
 
-  if (!context)
+  if (!context) {
     throw new Error(
       'usePlayerVoteContext must be used within a PlayerVoteContextProvider',
     );
+  }
 
   return context;
 };
