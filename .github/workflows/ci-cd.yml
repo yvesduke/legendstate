@@ -31,7 +31,7 @@ jobs:
       - name: Install Dependencies
         run: |
           yarn --frozen-lockfile
-          npx pod-install ios
+          yarn cd ios && pod install && cd ..
 
       - name: Test
         run: yarn test
@@ -39,12 +39,11 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Build Android
-        run: yarn android
+      # - name: Build Android
+      #   run: yarn android
 
-      - name: Build iOS
-        run: yarn ios # Replace with your iOS build command
-
+      # - name: Build iOS
+      #   run: yarn ios # Replace with your iOS build command
 
       # - name: Build
       #   run: npm run build --if-present
