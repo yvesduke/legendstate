@@ -1,7 +1,6 @@
 import {TamaguiProvider} from 'tamagui';
 import appConfig from '../tamagui.config';
 import {ScrollView, StyleSheet} from 'react-native';
-import React from 'react';
 import Home from './screens/Home';
 import * as Sentry from '@sentry/react-native';
 
