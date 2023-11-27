@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -26,24 +26,24 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install Dependencies
         run: |
-          npm ci
-          npx pod-install ios  # For iOS projects, run pod install
+          yarn --frozen-lockfile
+          npx pod-install ios
 
       - name: Test
-        run: npm run test
+        run: yarn test
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
       - name: Build Android
-        run: npm run android
+        run: yarn android
 
       - name: Build iOS
-        run: npm run ios # Replace with your iOS build command
+        run: yarn ios # Replace with your iOS build command
 
 
       # - name: Build
