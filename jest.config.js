@@ -17,4 +17,6 @@ module.exports = {
       statements: -10,
     },
   },
+  coveragePathIgnorePatterns: ['<rootDir>/src/types/'],
+  roots: ['<rootDir>/src'],
 };

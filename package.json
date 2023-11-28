@@ -26,8 +26,10 @@
     "tamagui": "^1.79.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@babel/preset-env": "^7.20.0",
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
     "@babel/runtime": "^7.20.0",
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.11",
@@ -37,7 +39,7 @@
     "@types/jest": "^29.5.10",
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
-    "babel-jest": "^29.2.1",
+    "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.0",
     "enzyme": "^3.11.0",
     "eslint": "^8.19.0",
