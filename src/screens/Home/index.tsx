@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Memo, observer, useObservable} from '@legendapp/state/react';
 import {ObservableObject} from '@legendapp/state';
 import {CountryCode, ClubCode} from '../../types';
@@ -27,9 +27,6 @@ const Home = observer((): JSX.Element => {
 
   const playersData = state.players.get(); // destructure data from state
 
-  // context api
-  // const {CVote, MVote} = usePlayerVote();
-
   const votePlayer = (id: number) => {
     if (id === 1) {
       state.voteForM.set(state.voteForM.get() + 1);
@@ -47,8 +44,9 @@ const Home = observer((): JSX.Element => {
   };
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
+    <SafeAreaView style={styles.body}>
+      <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
+
         <Text style={styles.sectionTitle}>Legend State Implementation</Text>
         <Text>Vote for the Best Football player in the world</Text>
         <Memo>
@@ -76,13 +74,17 @@ const Home = observer((): JSX.Element => {
           ))}
           <ScoreCard players={playersData} />
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 });
 
 const styles = StyleSheet.create({
-  container: {paddingHorizontal: 24},
+  body: {flex: 1},
+  container: {
+    flex: 1,
+    paddingHorizontal: 24,
+  },
   sectionContainer: {
     marginTop: 32,
     gap: 16,
