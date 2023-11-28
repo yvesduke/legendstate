@@ -1,3 +1,4 @@
+import React from 'react';
 import {TamaguiProvider} from 'tamagui';
 import appConfig from '../tamagui.config';
 import React from 'react';

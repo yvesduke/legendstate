@@ -1,9 +1,9 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {COLORS} from '../assets/constants';
 
 const HorizontalLine = () => {
-  return <View style={styles.line}></View>;
+  return <View style={styles.line} />;
 };
 
 export default HorizontalLine;

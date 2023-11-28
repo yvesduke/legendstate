@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import {PlayerVoteCard} from '../types/playerVoteCard';
 import {COLORS} from '../assets/constants';
 import {observer} from '@legendapp/state/react';
