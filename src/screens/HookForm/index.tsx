@@ -54,6 +54,7 @@ const HookForm = () => {
         control={control}
         rules={{
           maxLength: 100,
+          required: true,
         }}
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
@@ -66,7 +67,7 @@ const HookForm = () => {
         )}
         name="lastName"
       />
-      {errors.firstName && (
+      {errors.lastName && (
         <Text style={styles.errorText}>This is required.</Text>
       )}
       <TouchableOpacity

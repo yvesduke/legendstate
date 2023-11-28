@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
@@ -10,7 +9,7 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigation() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{headerShown: false}}>
         <Tab.Screen name="Legend" component={Home} />
         <Tab.Screen name="Form" component={HookForm} />
       </Tab.Navigator>

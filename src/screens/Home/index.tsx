@@ -1,12 +1,11 @@
 import React from 'react';
-import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Memo, observer, useObservable} from '@legendapp/state/react';
 import {ObservableObject} from '@legendapp/state';
 import {CountryCode, ClubCode} from '../../types';
 import {Player} from '../../types/player';
 import Card from '../../components/Card';
 import ScoreCard from '../../components/ScoreCard';
-import * as Sentry from '@sentry/react-native';
 
 import {Text} from '@tamagui/core'; // or '@tamagui/core'
 
@@ -16,7 +15,7 @@ interface State {
   voteForC: number;
 }
 
-const Home = observer(({navigation}): JSX.Element => {
+const Home = observer((): JSX.Element => {
   const state: ObservableObject<State> = useObservable({
     players: [
       {id: 1, name: 'Messi', club: ClubCode.PAR, country: CountryCode.ARG},
@@ -27,9 +26,6 @@ const Home = observer(({navigation}): JSX.Element => {
   });
 
   const playersData = state.players.get(); // destructure data from state
-
-  // context api
-  // const {CVote, MVote} = usePlayerVote();
 
   const votePlayer = (id: number) => {
     if (id === 1) {
@@ -48,14 +44,8 @@ const Home = observer(({navigation}): JSX.Element => {
   };
 
   return (
-    <SafeAreaView>
-      <Button
-        title="Try! Sentry"
-        onPress={() => {
-          Sentry.captureException(new Error('First error'));
-        }}
-      />
-      <View style={styles.container}>
+    <SafeAreaView style={styles.body}>
+      <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
         <Text style={styles.sectionTitle}>Legend State Implementation</Text>
         <Text>Vote for the Best Football player in the world</Text>
         <Memo>
@@ -83,13 +73,17 @@ const Home = observer(({navigation}): JSX.Element => {
           ))}
           <ScoreCard players={playersData} />
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 });
 
 const styles = StyleSheet.create({
-  container: {paddingHorizontal: 24},
+  body: {flex: 1},
+  container: {
+    flex: 1,
+    paddingHorizontal: 24,
+  },
   sectionContainer: {
     marginTop: 32,
     gap: 16,
