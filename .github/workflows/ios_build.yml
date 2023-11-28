@@ -60,6 +60,15 @@ jobs:
       - name: Test
         run: yarn test
 
+      - name: Install pm2
+        run: npm install pm2 -g
+
+      - name: Start Metro bundler
+        run: pm2 start "npx react-native start" --name start-metro
+
+      - name: Build iOS
+        run: npx react-native run-ios
+
     #   - name: Build IOS App
     #     uses: yukiarrr/ios-build-action@v1.4.0
     #     with:

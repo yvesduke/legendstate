@@ -1,3 +1,4 @@
+import React from 'react';
 import {render, screen, fireEvent} from '@testing-library/react-native';
 import Home from '.';
 import appConfig from '../../../tamagui.config';
@@ -19,12 +20,12 @@ describe('Home', () => {
   });
   it('should have heading', () => {
     setup();
-    expect(screen.getByText('Legend State Implementation'));
+    expect(screen.getByText('Legend State Implementation')).toBeDefined();
   });
   it('should have initial score', () => {
     setup();
     // expect(initScore).toBeTruthy;
-    expect(screen.getByText('Messi: 0 - 0 :Ronaldo'));
+    expect(screen.getByText('Messi: 0 - 0 :Ronaldo')).toBeDefined();
   });
 
   it('should have 8 buttons', () => {
@@ -43,7 +44,7 @@ describe('Home', () => {
     fireEvent.press(voteMessiButton);
 
     // Expect
-    expect(screen.getByText('Messi: 1 - 0 :Ronaldo'));
+    expect(screen.getByText('Messi: 1 - 0 :Ronaldo')).toBeDefined();
     expect(screen.getByTestId('Messi-vote').props.children).toEqual(1);
 
     // Act
@@ -51,7 +52,7 @@ describe('Home', () => {
     fireEvent.press(unvoteMessiButton);
 
     // Expect
-    expect(screen.getByText('Messi: 0 - 0 :Ronaldo'));
+    expect(screen.getByText('Messi: 0 - 0 :Ronaldo')).toBeDefined();
     expect(screen.getByTestId('Messi-vote').props.children).toEqual(0);
   });
 
@@ -64,7 +65,7 @@ describe('Home', () => {
     fireEvent.press(voteRonaldoButton);
 
     // Expect
-    expect(screen.getByText('Messi: 0 - 1 :Ronaldo'));
+    expect(screen.getByText('Messi: 0 - 1 :Ronaldo')).toBeDefined();
     expect(screen.getByTestId('Ronaldo-vote').props.children).toEqual(1);
 
     // Act
@@ -72,7 +73,7 @@ describe('Home', () => {
     fireEvent.press(unvoteRonaldoButton);
 
     // Expect
-    expect(screen.getByText('Messi: 0 - 0 :Ronaldo'));
+    expect(screen.getByText('Messi: 0 - 0 :Ronaldo')).toBeDefined();
     expect(screen.getByTestId('Ronaldo-vote').props.children).toEqual(0);
   });
 });

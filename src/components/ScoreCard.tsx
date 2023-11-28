@@ -24,7 +24,7 @@ const ScoreCard: React.FC<ScoreCardProp> = observer(({players}) => {
   return (
     <View style={[styles.cardContainer]}>
       <View style={[styles.sectionHeader]}>
-        <Text style={[styles.cardTitle, {marginBottom: 0}]}>Score Card</Text>
+        <Text style={[styles.cardTitle]}>Score Card</Text>
       </View>
 
       <HorizontalLine />

@@ -46,7 +46,6 @@ const Home = observer((): JSX.Element => {
   return (
     <SafeAreaView style={styles.body}>
       <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
-
         <Text style={styles.sectionTitle}>Legend State Implementation</Text>
         <Text>Vote for the Best Football player in the world</Text>
         <Memo>
