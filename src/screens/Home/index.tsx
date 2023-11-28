@@ -16,7 +16,7 @@ interface State {
   voteForC: number;
 }
 
-const Home = observer((): JSX.Element => {
+const Home = observer(({navigation}): JSX.Element => {
   const state: ObservableObject<State> = useObservable({
     players: [
       {id: 1, name: 'Messi', club: ClubCode.PAR, country: CountryCode.ARG},
