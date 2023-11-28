@@ -6,16 +6,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 16,
   },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
   input: {
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 16,
     paddingHorizontal: 10,
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 16,
+  },
+  submitButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+  },
+  submitButtonText: {
+    color: 'white',
+    textAlign: 'center',
   },
 });
 
