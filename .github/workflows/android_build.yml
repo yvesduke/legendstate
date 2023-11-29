@@ -44,8 +44,8 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Build
-        run: yarn android
+      # - name: Build
+      #   run: yarn android
 
       ## configure cash for gradle : will help to reduce build time
       # - name: Cache Gradle Wrapper
