@@ -52,11 +52,6 @@
     "react-test-renderer": "18.2.0",
     "typescript": "4.8.4"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run precommit"
-    }
-  },
   "engines": {
     "node": ">=16"
   }
