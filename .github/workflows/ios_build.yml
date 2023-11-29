@@ -10,12 +10,27 @@ on:
 #     types: [published] # only run the workflow when a new release has been published
 
 jobs:
+  create-environment-file:
+    runs-on: ubuntu-latest
+    outputs:
+      env: ${{ steps.set-env-file.outputs }}
+    steps:
+      - name: Create Environment File
+        id: set-env-file
+        run: |
+          echo "YARN_CACHE_DIR=$(yarn cache dir)" >> $GITHUB_ENV
+          echo "ANOTHER_VARIABLE=some_value" >> $GITHUB_ENV
+
   ios-build:
     name: IOS Production Build
     runs-on: macOS-latest
-    defaults:
-      run:
-        working-directory: ios
+    # defaults:
+    #   run:
+    #     working-directory: ios
+
+    env:
+      YARN_CACHE_DIR: ${{ needs.create-environment-file.outputs.env }}
+      ANOTHER_VARIABLE: ${{ needs.create-environment-file.outputs.env }}
 
     steps:
       - name: Set up Node.js
