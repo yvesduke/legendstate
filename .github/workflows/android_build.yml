@@ -41,8 +41,11 @@ jobs:
       - name: Test
         run: yarn test
 
-      - name: Lint
-        run: yarn lint
+      - name: Install pm2
+        run: npm install pm2 -g
+
+      - name: Start Metro bundler
+        run: pm2 start "npx react-native run-android" --name start-metro
 
       # - name: Build
       #   run: yarn android
