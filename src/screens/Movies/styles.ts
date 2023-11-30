@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     marginVertical: 4,
   },
+  padding: {
+    paddingVertical: 20,
+  },
 });
 
 export default styles;

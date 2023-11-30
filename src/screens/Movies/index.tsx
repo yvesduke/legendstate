@@ -4,7 +4,7 @@ import {usePopularMovies} from './hooks';
 import styles from './styles';
 
 // Function to shuffle an array using Fisher-Yates algorithm
-const shuffleArray = array => {
+const shuffleArray = (array: Movie[]) => {
   let currentIndex = array.length;
   let randomIndex;
 
@@ -21,12 +21,21 @@ const shuffleArray = array => {
   return array;
 };
 
+interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+  poster_path: string;
+}
+
 const MoviesScreen = () => {
   const {data, error, isLoading, fetchNextPage, isFetching} =
     usePopularMovies();
 
-  const [shuffledMovies, setShuffledMovies] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [shuffledMovies, setShuffledMovies] = useState<Movie[]>([]);
 
   const handleEndReached = () => {
     if (!isFetching && !error) {
@@ -34,6 +43,15 @@ const MoviesScreen = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const shuffleMovies = () => {
       if (data && shuffledMovies.length === 0) {
@@ -50,11 +68,6 @@ const MoviesScreen = () => {
       // Cleanup or handle any necessary actions on component unmount
     };
   }, [data, shuffledMovies, isFetching, error, fetchNextPage]);
-
-  const getNextPageParam = lastPage => {
-    // Return the next page number if it's less than or equal to 50
-    return lastPage.page < 50 ? lastPage.page + 1 : null;
-  };
 
   return (
     <FlatList
@@ -80,7 +93,7 @@ const MoviesScreen = () => {
       ListFooterComponent={() => {
         if (isFetching) {
           return (
-            <View style={{paddingVertical: 20}}>
+            <View style={styles.padding}>
               <ActivityIndicator size="large" />
             </View>
           );
