@@ -1,10 +1,37 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import {usePopularMovies} from './hooks';
+
+// Function to shuffle an array using Fisher-Yates algorithm
+const shuffleArray = array => {
+  let currentIndex = array.length;
+  let randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+};
 
 const MoviesScreen = () => {
   const {data, error, isLoading, fetchNextPage, isFetching} =
     usePopularMovies();
+
+  const [shuffledMovies, setShuffledMovies] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      // Shuffle the movies when the data changes
+      setShuffledMovies(shuffleArray(data.pages.flatMap(page => page.results)));
+    }
+  }, [data]);
 
   if (isLoading) {
     return (
@@ -22,11 +49,9 @@ const MoviesScreen = () => {
     );
   }
 
-  const movies = data?.pages.flatMap(page => page.results) || [];
-
   return (
     <FlatList
-      data={movies}
+      data={shuffledMovies}
       keyExtractor={item => item.id.toString()}
       renderItem={({item}) => (
         <View style={{margin: 16}}>
