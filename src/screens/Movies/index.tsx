@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import {usePopularMovies} from './hooks';
+import styles from './styles';
 
 // Function to shuffle an array using Fisher-Yates algorithm
 const shuffleArray = array => {
@@ -21,57 +22,54 @@ const shuffleArray = array => {
 };
 
 const MoviesScreen = () => {
-  const {data, error, isLoading, fetchNextPage, isFetching} =
-    usePopularMovies();
+  const {data, error, fetchNextPage, isFetching} = usePopularMovies();
 
   const [shuffledMovies, setShuffledMovies] = useState([]);
 
-  useEffect(() => {
-    if (data) {
-      // Shuffle the movies when the data changes
-      setShuffledMovies(shuffleArray(data.pages.flatMap(page => page.results)));
+  const handleEndReached = () => {
+    if (!isFetching && !error) {
+      fetchNextPage();
     }
-  }, [data]);
+  };
 
-  if (isLoading) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+  useEffect(() => {
+    const shuffleMovies = () => {
+      if (data && shuffledMovies.length === 0) {
+        // Shuffle the movies only when the screen starts
+        setShuffledMovies(
+          shuffleArray(data.pages.flatMap(page => page.results)),
+        );
+      }
+    };
 
-  if (error) {
-    return (
-      <View>
-        <Text>Error: {(error as Error).message}</Text>
-      </View>
-    );
-  }
+    shuffleMovies();
+
+    return () => {
+      // Cleanup or handle any necessary actions on component unmount
+    };
+  }, [data, shuffledMovies, isFetching, error, fetchNextPage]);
 
   return (
     <FlatList
       data={shuffledMovies}
       keyExtractor={item => item.id.toString()}
       renderItem={({item}) => (
-        <View style={{margin: 16}}>
+        <View style={styles.views}>
           <Image
-            style={{width: '100%', height: 250}}
+            style={styles.images}
             source={{
               uri: `https://image.tmdb.org/t/p/w200/${item.poster_path}`,
             }}
           />
-          <Text>{item.title}</Text>
-          <Text>{item.overview}</Text>
-          <Text>{item.release_date}</Text>
+          <Text style={styles.titles}> {item.title}</Text>
+          <Text style={styles.subTitle}>OverView: {item.overview}</Text>
+          <Text style={styles.subTitle}>Release Date: {item.release_date}</Text>
+          <Text style={styles.subTitle}>Vote Average: {item.vote_average}</Text>
+          <Text style={styles.subTitle}>Vote Count: {item.vote_count}</Text>
         </View>
       )}
       onEndReachedThreshold={0.75}
-      onEndReached={() => {
-        if (!isFetching && !error) {
-          fetchNextPage();
-        }
-      }}
+      onEndReached={handleEndReached}
       ListFooterComponent={() => {
         if (isFetching) {
           return (

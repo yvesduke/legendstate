@@ -5,3 +5,9 @@ export const COLORS = {
   GREEN: '#4CAF50',
   RED: '#FF5733',
 };
+
+export const SIZES = {
+  SMALL: 'small',
+  MEDIUM: 'medium',
+  LARGE: 'large',
+};
