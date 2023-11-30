@@ -22,9 +22,11 @@ const shuffleArray = array => {
 };
 
 const MoviesScreen = () => {
-  const {data, error, fetchNextPage, isFetching} = usePopularMovies();
+  const {data, error, isLoading, fetchNextPage, isFetching} =
+    usePopularMovies();
 
   const [shuffledMovies, setShuffledMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleEndReached = () => {
     if (!isFetching && !error) {
@@ -48,6 +50,11 @@ const MoviesScreen = () => {
       // Cleanup or handle any necessary actions on component unmount
     };
   }, [data, shuffledMovies, isFetching, error, fetchNextPage]);
+
+  const getNextPageParam = lastPage => {
+    // Return the next page number if it's less than or equal to 50
+    return lastPage.page < 50 ? lastPage.page + 1 : null;
+  };
 
   return (
     <FlatList
