@@ -5,6 +5,7 @@ import Home from '../screens/Home';
 import HookForm from '../screens/HookForm';
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import GraphQLStack from '../navigations/GraphQLStack';
+import {RedLightGreenLightScreen} from '../screens';
 
 const client = new ApolloClient({
   uri: 'https://api.graphql.guide/graphql',
@@ -21,6 +22,10 @@ export default function TabNavigation() {
           <Tab.Screen name="Legend" component={Home} />
           <Tab.Screen name="Form" component={HookForm} />
           <Tab.Screen name="GraphQLStack" component={GraphQLStack} />
+          <Tab.Screen
+            name="RedLightGreenLightScreen"
+            component={RedLightGreenLightScreen}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </ApolloProvider>
