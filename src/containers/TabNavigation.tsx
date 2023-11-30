@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import HookForm from '../screens/HookForm';
+import MoviesScreen from '../screens/Movies';
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import GraphQLStack from '../navigations/GraphQLStack';
 import {RedLightGreenLightScreen} from '../screens';
@@ -22,6 +23,11 @@ export default function TabNavigation() {
           <Tab.Screen name="Legend" component={Home} />
           <Tab.Screen name="Form" component={HookForm} />
           <Tab.Screen name="GraphQLStack" component={GraphQLStack} />
+          <Tab.Screen
+            name="Movies"
+            component={MoviesScreen}
+            options={{headerShown: true}}
+          />
           <Tab.Screen
             name="RedLightGreenLightScreen"
             component={RedLightGreenLightScreen}
