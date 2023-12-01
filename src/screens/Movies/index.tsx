@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import {usePopularMovies} from './hooks';
 import styles from './styles';
+import {Movie} from './api';
+import {Loading} from '../../components';
 
 // Function to shuffle an array using Fisher-Yates algorithm
 const shuffleArray = (array: Movie[]) => {
@@ -21,21 +23,11 @@ const shuffleArray = (array: Movie[]) => {
   return array;
 };
 
-interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  release_date: string;
-  vote_average: number;
-  vote_count: number;
-  poster_path: string;
-}
-
 const MoviesScreen = () => {
   const {data, error, isLoading, fetchNextPage, isFetching} =
     usePopularMovies();
 
-  const [shuffledMovies, setShuffledMovies] = useState<Movie[]>([]);
+  const [shuffledMovies, setShuffledMovies] = useState<Movie[] | []>([]);
 
   const handleEndReached = () => {
     if (!isFetching && !error) {
@@ -44,14 +36,9 @@ const MoviesScreen = () => {
   };
 
   if (isLoading) {
-    return (
-      <View style={styles.loading}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
+    <Loading />;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const shuffleMovies = () => {
       if (data && shuffledMovies.length === 0) {
