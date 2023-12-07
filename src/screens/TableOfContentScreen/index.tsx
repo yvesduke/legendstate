@@ -1,8 +1,7 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import {ScrollView, Text, View} from 'tamagui';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {ScrollView, Text} from 'tamagui';
+import {useNavigation} from '@react-navigation/native';
 
 const TableOfContentScreen = () => {
   const navigation = useNavigation();
@@ -16,8 +15,6 @@ const TableOfContentScreen = () => {
   const handleSectionPress = screen => {
     navigation.navigate(screen);
   };
-
-  const Stack = createNativeStackNavigator();
 
   return (
     <ScrollView style={{flex: 1, paddingTop: 50, padding: 16}}>

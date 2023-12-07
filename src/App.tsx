@@ -2,7 +2,6 @@ import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {TamaguiProvider} from 'tamagui';
 import appConfig from '../tamagui.config';
-import TabNavigation from './containers/TabNavigation';
 import Tabs from './containers/tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -33,4 +32,3 @@ const App = () => {
 };
 
 export default App;
-
